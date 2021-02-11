@@ -5,8 +5,8 @@ import { AppContext } from './ContextProvider';
 import axios from 'axios';
 
 const CreateEvent = (props) => {
-  const { id }= useParams()
-  const { events, setEvents } = useContext(AppContext)
+  const { id }= useParams();
+  const { events, setEvents } = useContext(AppContext);
   const [inputFields, setInputFields] = useState([
     { eventName: "", eventLat: "", eventLon: "", eventRiddle: "" },
   ]);

@@ -1,9 +1,11 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useContext } from "react";
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.css";
+import { AppContext } from './ContextProvider';
 import axios from 'axios';
 
-const CreateHunt = () => {
+const CreateHunt = (props) => {
+  const { user } = useContext(AppContext);
   const [inputFields, setInputFields] = useState([
     { huntName: "", huntLat: "", huntLon: "", huntDetail: "" },
   ]);
@@ -46,7 +48,7 @@ const CreateHunt = () => {
       hunt_lat: inputFields[0]["huntLat"],
       hunt_long: inputFields[0]["huntLon"],
       hunt_votes: 0,
-      user_id: 1
+      user_id: user.user_id
     }
 
     console.log(data);
@@ -54,8 +56,8 @@ const CreateHunt = () => {
     axios.post('http://localhost:3000/api/hunts/createHunt', data)
     .then(res => {
       if (res.status === 200) {
-        alert("Hunt successfully created. Return to Hunts List Page!")
-        props.history.push('/')
+        alert("Hunt successfully created. Return to Hunts List Page!");
+        props.history.push('/hunts');
       } else {
         alert("Error creating Hunt");
       }
