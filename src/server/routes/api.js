@@ -49,6 +49,7 @@ router.post("/subs/signup", userHuntsController.signUpForHunt, (req, res) => {
   return res.status(200).send("successfully signed up for hunt");
 });
 
+
 //post route for startHunt
 router.post("/subs/started", userHuntsController.startHunt, (req, res) => {
   return res.status(200).send("successfully started hunt");
@@ -64,7 +65,7 @@ router.post("/subs/completed", userHuntsController.completeHunt, (req, res) => {
 //get specific hunt, set hunt_id
 router.get("/hunts/:hunt_id", huntsController.getHunt, (req, res) => {
     return res.status(200).json(res.locals.hunt)
-})
+});
 
 //get all hunts
 router.get("/hunts", huntsController.getAllHunts, (req, res) => {
@@ -74,6 +75,10 @@ router.get("/hunts", huntsController.getAllHunts, (req, res) => {
 //------POST-----
 router.post("/hunts/createHunt", huntsController.createHunt, (req, res) => {
   return res.status(200).json('hunt created!');
+});
+
+router.post("/hunts/updateHuntVote", huntsController.updateVotes, (req, res) => {
+  return res.status(200).json('hunt votes updated!');
 });
 
 //-----------------------------------EVENTS-------------------------------

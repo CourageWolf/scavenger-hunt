@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState, Fragment, useContext } from "react";
+import { Link, useLocation } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.css";
 import axios from 'axios';
 import PlacesAutocomplete from "react-places-autocomplete";
+import { AppContext } from './ContextProvider';
 
 import {
   geocodeByAddress,
@@ -14,7 +15,6 @@ import LocationSearchInput from "./LocationSearchInput";
 
 
 
-
 const CreateHunt = () => {
   /**
    * object with input field values held in local state
@@ -22,6 +22,7 @@ const CreateHunt = () => {
   const [inputFields, setInputFields] = useState([
     { huntName: "", huntLat: "", huntLon: "", huntDetail: "" },
   ]);
+  const { user } = useContext(AppContext);
 
   /**
    * handler to add an additional set of fields
@@ -85,7 +86,7 @@ const CreateHunt = () => {
       hunt_lat: newLat,
       hunt_long: newLng,
       hunt_votes: 0,
-      user_id: 1
+      user_id: user.user_id
     }
 
     axios.post('http://localhost:3000/api/hunts/createHunt', data)
@@ -103,11 +104,7 @@ const CreateHunt = () => {
 
   return (
     <>
-      <Link 
-      to='/hunts'
-      className="btn btn-primary mr-2"
-      type="button"
-      >Back to Hunts</Link>
+      
       <h1>Create Hunt!</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-col">
@@ -157,8 +154,13 @@ const CreateHunt = () => {
           ))}
         </div>
         <div className="submit-button">
-          <button
-            className="btn btn-primary mr-2"
+          <Link 
+      to='/hunts'
+      className="btn btn-outline-secondary mr-2 w-50"
+      type="button"
+      >Back to Hunts</Link>
+      <button
+            className="btn btn-primary mr-2 w-50"
             type="submit"
             onSubmit={handleSubmit}
           >

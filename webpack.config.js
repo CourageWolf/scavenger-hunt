@@ -23,6 +23,7 @@ module.exports = {
           },
         },
       },
+      
       {
         test: /css?$/,
         use: [
@@ -30,6 +31,10 @@ module.exports = {
           "css-loader",
         ],
       },
+      {
+        test: /\.(svg|eot|woff|woff2|ttf)$/,
+        use: ['file-loader']
+    },
       {
         test: /\.jpg$/,
         use: "url-loader",

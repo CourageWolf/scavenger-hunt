@@ -4,14 +4,20 @@ body {
     margin: 0;
 }
 
+.hunt-page {
+  /* box-shadow: 10px 5px 5px gray; */
+}
+
 .list-item-section {
-    padding: 10px 0;
+    /* padding: 10px 0; */
+  
 }
 
 .list-item-container {
-    padding: 10px;
-    border-style: solid;
-    border-width: 1px;
+  margin: 0;  
+  padding: 10px;
+    border: 1px solid lightgray
+    /* box-shadow: 5px 10px 5px gray; */
 }
 
 .listItem {
@@ -20,6 +26,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    
 }
 
 .listItem .text-container {
@@ -30,8 +37,40 @@ body {
 
 .listItem .navigate-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+}
+
+.navigate {
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.navigate button {
+  margin-right: 5px;
+  border-radius: 7%; 
+  width: 15vw;
+  height: 5vh;
+  /* background-color: rgb(0, 151, 249); */
+  /* color: white */
+  
+}
+
+.navigate a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.submit-button {
+  display: flex;
+  flex-direction: row;
+}
+
+.map-container {
+  box-shadow:  0 0 10px  rgba(0,0,0,0.6);
 }
 
 .listItem .voting-buttons-container {
@@ -43,15 +82,21 @@ body {
 }
 
 .listItem .upvote-button {
-  background-color: green;
-  color: white;
+  background-color: inherit;
+  font-size: large;
+  font-weight: bold;
+  color: gray;
   margin-right: 2px;
+  border: none;
 }
 
 .listItem .downvote-button {
-  background-color: red;
-  color: white;
+  background-color: inherit;
+  font-size: large;
+  font-weight: bold;
+  color: gray;
   margin-left: 2px;
+  border: none;
 }
 
 .listItem .voteCountGreen {

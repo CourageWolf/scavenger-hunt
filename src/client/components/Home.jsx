@@ -22,7 +22,18 @@ const Home = (props) => {
       userLng: -122.4230
     };
 
-    
+    /* Iterate events to size, center, and zoom map to contain all markers  */
+    const fitBounds = map => {
+      const bounds = new google.maps.LatLngBounds();
+      events.map(event => {
+        // size bounds accordingly 
+        console.log(event.event_pos)
+        bounds.extend(event.event_pos);
+        return event.event_id;
+      })
+      // auto-zoom
+      map.fitBounds(bounds);
+    }
 
     const onLoad = useCallback(map => {
         const bounds = new window.google.maps.LatLngBounds();

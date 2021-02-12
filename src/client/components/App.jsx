@@ -7,8 +7,13 @@ import Signup from "./Signup";
 import CreateHunt from "./CreateHunt";
 import CreateEvent from "./CreateEvent";
 import { AppContext } from './ContextProvider';
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Login from './Login'
 import '../styles/styles.css'
+
+import "bootstrap/dist/css/bootstrap.css";
+import 'font-awesome/css/font-awesome.min.css';
 import 'normalize.css';
 
 
@@ -90,7 +95,7 @@ class App extends Component {
   // FIXME added BrowserRouter wrapper in order to be able to prop drill via Link components
   render() {
     return (
-        <div className="app">
+        <div className="app w-screen m-0 p-0 font-sans">
         <AppContext.Provider value={this.state}>
           
           <BrowserRouter>

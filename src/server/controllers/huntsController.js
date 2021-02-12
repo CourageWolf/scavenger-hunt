@@ -13,8 +13,18 @@ huntsController.createHunt = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+huntsController.updateVotes = (req, res, next) => {
+  const params = [req.body.hunt_id, req.body.hunt_votes];
+  const queryText =
+    "UPDATE public.hunts SET hunt_votes = $2 WHERE hunt_id = $1;";
+
+  db.query(queryText, params)
+    .then((res) => next())
+    .catch((err) => next(err));
+};
+
 //read
-// getHunt(hunt_id)
+// getHunt(hunt_id)z
 huntsController.getHunt = (req, res, next) => {
   const params = [req.params.hunt_id];
   const queryText = "SELECT * FROM public.hunts WHERE hunt_id = $1;";
