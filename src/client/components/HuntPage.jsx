@@ -13,6 +13,7 @@ const HuntPage = (props) => {
       hunts,
       events,
       setEvents,
+      user
     } = useContext(AppContext)
 
     const [currentHunt, setCurrentHunt] = useState('');
@@ -109,7 +110,6 @@ const HuntPage = (props) => {
       map.fitBounds(bounds);
     }
     
-    
     useEffect(() => {
       // Fit map bounds to contain all markers
       console.log('MAPREF', map)
@@ -119,14 +119,10 @@ const HuntPage = (props) => {
       }
     }, [events, map])
 
-    
     const onMapLoad = useCallback(map => {
       // Store a reference to the google map instance in state
       setMap(map);
     },[]);
-
-    
-
 
     const onMapUnmount = useCallback(map => {
         setMap(null);
@@ -141,36 +137,27 @@ const HuntPage = (props) => {
     };
 
     const uploadPhotoHandler = async (file, id) => {
+
+        console.log(id)
+
         const { event_pos, event_name, event_riddle } = events.find(event => event.event_id === id);
         const { lat, lng } = event_pos;
+        
+        const formData = new FormData()
+        formData.append(0, file);
 
         // Placeholder code to simulate upload photo asynchronously
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve()
-            }, 1000)
-        })
-
+        const response = await fetch(`http://localhost:3000/api/photos/image-upload/` + id + '/' + user.user_id, {
+            method: 'POST',
+            body: formData
+          })
+        const jsonRes = await response.json();
+        console.log(jsonRes)
         // Request all Photo urls for this event from API
-        const urls = await requestPhotos(id);
+        const urls = jsonRes.map(curr => curr.photo_src)
         // TODO Once, the above line actually returns URLs, replace the prop value photoUrls with the urls array...
-        setSelectedEvent(<PhotoInfoWindow onCloseClick={() => { setSelectedEvent(null) }} lat={lat} lng={lng} title={event_name} description={event_riddle} photoUrls={[URL.createObjectURL(file), URL.createObjectURL(file), URL.createObjectURL(file)]}/>)
+        setSelectedEvent(<PhotoInfoWindow onCloseClick={() => { setSelectedEvent(null) }} lat={lat} lng={lng} title={event_name} description={event_riddle} photoUrls={urls}/>)
     }
-
-    const requestPhotos = (eventId) => {
-        // Placeholder code to simulate requesting photos asynchronously
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve([ /*STUB HOSTED IMAGE URLS*/]);
-            }, 2000);
-        })
-    }
-//merge conflict head
-    /*
-     * Placeholder Center...
-     * TODO Calculate the center of the map dynamically based on all pins...
-     */
-    
 
     /* Format options for the Polyline path */
      const pathOptions = {
@@ -184,7 +171,6 @@ const HuntPage = (props) => {
       editable: false,
       visible: true,
     }
-//merge conflict tail
     return (
         <>
             <Link to='/hunts'

@@ -68,7 +68,7 @@ class App extends Component {
 
 
   this.state = {
-    user: {},
+    user: {user_id: 5, user_name: 'guest', password: 'guest', },
     // default location set to Austin, TX
     userLat: 30.2672,
     userLng: -97.7431,

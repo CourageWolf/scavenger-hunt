@@ -115,7 +115,7 @@ router.post("/photos/addPhoto", photosController.createPhoto, (req, res) => {
   return res.status(200).send("successfully created photo");
 });
 
-router.post('/photos/image-upload/:event_id', photosController.uploadPhoto, photosController.createPhoto, photosController.getPhotosByEvent, (req, res) => {
+router.post('/photos/image-upload/:event_id/:user_id', photosController.uploadPhoto, photosController.createPhoto, photosController.getPhotosByEvent, (req, res) => {
   return res.status(200).json(res.locals.photos)
 });
 

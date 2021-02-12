@@ -13,7 +13,7 @@ const photosController = {};
 // createPhoto(user_id, event_id)
 photosController.createPhoto = (req, res, next) => {
   // const params = [req.body.user_id, req.body.event_id, req.body.photo_src];
-  const params = [1, req.params.event_id, res.locals.photo_src]
+  const params = [req.params.user_id, req.params.event_id, res.locals.photo_src]
   const queryText =
     "INSERT INTO public.photos (user_id, event_id, photo_src) VALUES ($1, $2, $3);";
 
